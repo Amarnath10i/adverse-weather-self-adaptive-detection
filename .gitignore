@@ -1,0 +1,26 @@
+# ── Heavy / machine-local run artifacts ───────────────────────────────
+# Resumable state, generated datasets, YOLO runs and caches live here.
+# They are recreated locally and let a killed run resume — not for git.
+artifacts/
+runs/
+datasets/
+depth_cache/
+*.zip
+
+# Auto-downloaded model weights (recreated on demand)
+yolov8*.pt
+yolo11*.pt
+coco128*/
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
