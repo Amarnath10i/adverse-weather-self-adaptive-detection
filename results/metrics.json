@@ -1,0 +1,65 @@
+{
+  "mode": "QUICK_DEMO",
+  "device": "cuda",
+  "weathers": [
+    "fog",
+    "mist",
+    "rain",
+    "snow",
+    "dust",
+    "sand",
+    "humid",
+    "night",
+    "glare",
+    "dawn_mist",
+    "morning_fog",
+    "noon_glare",
+    "noon_humid",
+    "afternoon_dust",
+    "dusk_rain",
+    "dusk_sandstorm",
+    "night_rain",
+    "night_fog",
+    "night_snow"
+  ],
+  "sweep_severities": [
+    0.3,
+    0.7
+  ],
+  "classes": [
+    "car",
+    "person",
+    "bicycle",
+    "motorcycle",
+    "bus",
+    "truck",
+    "traffic_light",
+    "stop_sign"
+  ],
+  "baseline_mean_ap": 20.229,
+  "final_mean_ap": 23.983,
+  "cycles": [
+    {
+      "cycle": 0,
+      "action": "baseline",
+      "variant": "yolov8n.pt",
+      "mean_ap": 20.229
+    },
+    {
+      "cycle": 1,
+      "action": "targeted",
+      "variant": "yolov8n.pt",
+      "mean_ap": 8.341
+    },
+    {
+      "cycle": 2,
+      "action": "grow",
+      "variant": "yolov8s.pt",
+      "mean_ap": 23.983
+    }
+  ],
+  "pruned": {
+    "mean_ap": 0.085,
+    "conv_sparsity_pct": 0.0
+  }
+}

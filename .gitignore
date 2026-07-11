@@ -24,3 +24,9 @@ env/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# heavy weights / scratch
+yolo26*.pt
+results/*.pt
+add_research_cells.py
+update_notebook.py
