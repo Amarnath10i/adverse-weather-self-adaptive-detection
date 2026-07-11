@@ -1,0 +1,35 @@
+body {
+    background-color: #141414;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    text-align: center;
+    font-size: 42px;
+    font-weight: bold;
+    color: #e50914;
+    margin-bottom: 30px;
+}
+
+.movie-card {
+    background-color: #1f1f1f;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.stButton>button {
+    background-color: #e50914;
+    color: white;
+    border-radius: 6px;
+    padding: 10px 20px;
+    border: none;
+    font-size: 16px;
+}
+
+.stButton>button:hover {
+    background-color: #b20710;
+}
