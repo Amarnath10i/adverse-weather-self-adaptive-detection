@@ -12,6 +12,17 @@ by the model's own weights and outputs.
 
 ---
 
+## Try the weather generator
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+The playground applies every condition and the time-of-day presets (dawn mist, dusk sandstorm, night rain…) to a procedurally drawn road scene or your own photo, at any severity. It needs only NumPy and OpenCV, so it also runs in the browser. The generators live in [`awsa/weather.py`](awsa/weather.py), extracted from the notebook's first section.
+
+**Bug fixed while building it:** the fallback depth prior was upside down. It made the bottom of the frame, the road right in front of the camera, the *farthest* point, so fog, dust and sand were thickest nearest the car. It now runs from near at the bottom to far at the top, in the notebook too. The pipeline prefers Depth-Anything-V2 depth, but the committed smoke-test results below fell back to the prior, so they predate this fix.
+
 ## What it does
 
 | Stage | Idea |
@@ -44,10 +55,10 @@ Each is a single-parameter *severity dial* in `[0, 1]`, so the whole failure map
 - **Self-pruning (weight & output driven)**: L1-magnitude prune of every conv (weights) plus
   activation-magnitude channel pruning (outputs), followed by recovery fine-tuning.
 
-## Run it
+## Run the full pipeline
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements-train.txt
 
 # Scaled run (CPU-friendly, completes end-to-end):
 jupyter nbconvert --to notebook --execute --inplace adverse_weather_self_adaptive_kaggle.ipynb

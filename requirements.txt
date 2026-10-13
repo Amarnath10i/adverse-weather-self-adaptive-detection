@@ -1,22 +1,5 @@
-# Core deep-learning stack
-torch>=2.1
-torchvision>=0.16
-
-# Detection framework (YOLOv8)
-ultralytics>=8.1
-
-# Depth estimation (Depth-Anything-V2 via HF pipeline; falls back to a
-# gradient prior if these / the network are unavailable)
-transformers>=4.40
-timm>=0.9
-
-# Imaging / numerics / plotting
-opencv-python>=4.8
+# Weather playground (app.py). Also what the in-browser demo installs.
+streamlit>=1.37
 numpy>=1.24
+opencv-python>=4.8
 pillow>=10.0
-matplotlib>=3.7
-
-# Notebook execution (headless runs)
-jupyter
-nbconvert
-ipykernel
