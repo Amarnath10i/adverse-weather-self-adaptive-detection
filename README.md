@@ -6,8 +6,9 @@ haze, night and glare — using **physics-based synthetic weather generation**, 
 **self-improving / adaptive training loop**, and **self-pruning + capacity-growth** driven
 by the model's own weights and outputs.
 
-> Status: work in progress. Runs end-to-end on CPU in a *scaled* configuration and scales
-> to GPU / full data with a single switch (`AWSA_FULL=1`).
+> **Status: work in progress.** The pipeline runs end to end in a smoke-test configuration
+> (20 source images, 3 baseline epochs). The full run (`AWSA_FULL=1`) has not been done yet,
+> so there are no results yet that show the method works; see [Results](#results).
 
 ---
 
@@ -73,9 +74,23 @@ Set `AWSA_RESUME=0` to force a clean run.
 
 ## Results
 
-See [`results/`](results/) — failure maps, the self-improvement curve, metrics JSON, and the
-final / pruned model weights are written there when the notebook runs.
+`results/` holds the output of the **smoke-test run** (COCO128 subset, 20 source images,
+YOLOv8n at 384 px, 3 baseline epochs, 2 adaptation cycles, severities 0.3 and 0.7). It shows
+the pipeline executes; at this scale the numbers are noise, not evidence:
 
-## License
+| cycle | action | model | mean AP@0.5 over the weather grid |
+|---|---|---|---|
+| 0 | baseline | YOLOv8n | 20.2 |
+| 1 | targeted oversampling of weak cells | YOLOv8n | 8.3 |
+| 2 | capacity growth | YOLOv8s | 24.0 |
+| - | L1 + activation pruning, then fine-tune | YOLOv8s | 0.1 |
 
-[MIT](LICENSE)
+Known issues found by this run:
+- **Targeted fine-tuning hurt** (20.2 to 8.3). With 20 source images and 2 epochs this may be
+  noise or forgetting of the clean/easy mix; the full run has to tell which.
+- **Pruning is broken**: it reports 0% conv sparsity yet mean AP collapses to 0.1, so the
+  pruning/recovery stage corrupts weights rather than removing channels. It must be fixed
+  before any pruning result is reported.
+
+Next steps: fix pruning, then run `AWSA_FULL=1` on BDD100K (`AWSA_BDD`) and evaluate
+synthetic-to-real transfer on RTTS / DAWN.
